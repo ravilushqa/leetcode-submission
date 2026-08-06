@@ -1,7 +1,5 @@
-import "strconv"
-
 func compress(chars []byte) int {
-    readIdx, writeIdx := 0, 0
+    readIdx, writeIdx := 0,  0
 
     for readIdx < len(chars) {
         ch := chars[readIdx]
@@ -17,8 +15,9 @@ func compress(chars []byte) int {
             writeIdx++
 
             continue
-        }
+        } 
 
+        // more then one
         chars[writeIdx] = ch
         writeIdx++
 
@@ -30,4 +29,3 @@ func compress(chars []byte) int {
 
     return writeIdx
 }
-
