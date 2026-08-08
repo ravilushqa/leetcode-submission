@@ -19,10 +19,3 @@ func merge(intervals [][]int) [][]int {
     return merged
 }
 
-func max(x,y int) int {
-    if x > y {
-        return x
-    }
-
-    return y
-}
