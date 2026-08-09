@@ -1,25 +1,21 @@
-import (
-    "fmt"
-)
-
 func summaryRanges(nums []int) []string {
-    var res []string
-    var i int
+    res := make([]string, 0)
+    i := 0
 
     for i < len(nums) {
         start := nums[i]
-        for i < len(nums) - 1 && nums[i]+1 == nums[i+1] {
+
+        for i + 1 < len(nums) && nums[i] + 1 == nums[i + 1] {
             i++
             continue
         }
 
         if start == nums[i] {
             res = append(res, fmt.Sprintf("%d", start))
-            i++
-            continue
+        } else {
+            res = append(res, fmt.Sprintf("%d->%d", start, nums[i]))
         }
-
-        res = append(res, fmt.Sprintf("%d->%d", start, nums[i]))        
+        
         i++
     }
 
