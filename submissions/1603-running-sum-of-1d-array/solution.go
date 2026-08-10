@@ -1,10 +1,11 @@
 func runningSum(nums []int) []int {
-	res := make([]int, len(nums))
-	for i:=len(nums)-1; i>=0;i-- {
-		for j := i; j>=0;j-- {
-			res[i]+=nums[j]
-		}
-	}
+    for i := range nums {
+        if i == 0 {
+            continue
+        }
 
-	return res
+        nums[i] = nums[i-1] + nums[i]
+    }
+
+    return nums
 }
