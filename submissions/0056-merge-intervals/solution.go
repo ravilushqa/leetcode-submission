@@ -1,21 +1,21 @@
 func merge(intervals [][]int) [][]int {
     sort.Slice(intervals, func(i,j int) bool {
-        return intervals[i][0]<intervals[j][0]
+        return intervals[i][0] < intervals[j][0]
     })
 
-    merged := make([][]int, 0)
-    for _, interval := range intervals {
-        if len(merged) == 0 {
-            merged = append(merged, interval)
-        }
+    res := [][]int{}
 
-        if merged[len(merged)-1][1] >= interval[0] {
-            merged[len(merged)-1][1] = max(merged[len(merged)-1][1], interval[1])
+    for i := range intervals {
+        if i == 0 || !isIntersect(res[len(res) - 1], intervals[i]) {
+            res = append(res, intervals[i])
         } else {
-            merged = append(merged, interval)
+            res[len(res) - 1][1] = max(res[len(res) - 1][1],intervals[i][1])
         }
     }
 
-    return merged
+    return res
 }
 
+func isIntersect(x,y []int) bool {
+    return x[1] >= y[0]
+}
