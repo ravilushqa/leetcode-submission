@@ -5,15 +5,15 @@
  *     Next *ListNode
  * }
  */
-func reverseList(head *ListNode) *ListNode {
+func reverseList(head *ListNode) *ListNode {    
+    el := head
+    
     var prev *ListNode
-    curr := head
-
-    for curr != nil {
-        next := curr.Next
-        curr.Next = prev
-        prev = curr
-        curr = next
+    for el != nil {
+        next := el.Next
+        el.Next = prev
+        prev = el
+        el = next
     }
 
     return prev
