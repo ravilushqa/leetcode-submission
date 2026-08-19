@@ -1,5 +1,5 @@
 func longestSubarray(nums []int) int {
-    var res, zeros, start int
+    var res, start, zeros int
 
     for end, v := range nums {
         if v == 0 {
@@ -13,9 +13,8 @@ func longestSubarray(nums []int) int {
             start++
         }
 
-        res = max(res, end-start)
+        res = max(res, end - start)
     }
 
     return res
 }
-
