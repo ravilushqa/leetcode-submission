@@ -1,19 +1,18 @@
 func subarraySum(nums []int, k int) int {
-    var res, cur int
+    res := 0
+    prefix := map[int]int{0:1}
 
-    seen := map[int]int{0:1}
+    // map 
 
-    // [1,1,1] k = 2
-    // 0,1,2,3
-    // 1 -2 0 | 0:1, 1:1
-    // 2 0 +1 | 0:1,1:1,2:1
-    // 3 1 +1 | 0:1,1:1,2:1,3:1
 
+    sum := 0
     for _, v := range nums {
-        cur += v
-        res += seen[cur-k]
+        sum += v
+        if prefix[sum - k] > 0 {
+            res += prefix[sum - k]
+        }
 
-        seen[cur]++
+        prefix[sum]++
     }
 
     return res
