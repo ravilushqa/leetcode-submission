@@ -2,21 +2,29 @@ func characterReplacement(s string, k int) int {
     res := 0
     start := 0
 
-    var chars [26]int
-    maxFreq := 0
+    var freqs [26]int
+
     for end, v := range []byte(s) {
-        chars[v - 'A']++
-
+        freqs[v-'A']++
+        maxFreq := GetMaxFreq(freqs)
         windowLen := end - start + 1
-        maxFreq = max(maxFreq, chars[v - 'A'])
-
-        for windowLen - maxFreq > k{
-            chars[s[start] - 'A']--
+        for windowLen - maxFreq > k {
+            freqs[s[start] - 'A']--
             start++
             windowLen--
+            maxFreq = GetMaxFreq(freqs)
         }
 
-        res = max(res, end - start + 1)
+        res = max(res, windowLen)
+    }
+
+    return res
+}
+
+func GetMaxFreq(freqs [26]int) int {
+    var res int
+    for _,v := range freqs {
+        res = max(res, v)
     }
 
     return res
