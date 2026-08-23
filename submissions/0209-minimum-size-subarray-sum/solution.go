@@ -5,7 +5,8 @@ func minSubArrayLen(target int, nums []int) int {
     sum := 0
     for end, v := range nums {
         sum += v
-        for sum >= target {
+        
+        for target <= sum {
             if res == 0 {
                 res = end - start + 1
             } else {
@@ -14,6 +15,7 @@ func minSubArrayLen(target int, nums []int) int {
             sum -= nums[start]
             start++
         }
+        
     }
 
     return res
