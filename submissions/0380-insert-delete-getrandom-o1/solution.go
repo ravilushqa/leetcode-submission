@@ -1,57 +1,54 @@
 import "math/rand/v2"
 
 type RandomizedSet struct {
-    m map[int]int
-    nums []int
+    vals []int
+    idxByVal map[int]int
 }
 
 
 func Constructor() RandomizedSet {
     return RandomizedSet{
-        m: map[int]int{},
-        nums: []int{},
+        vals: make([]int, 0),
+        idxByVal: make(map[int]int),
     }
 }
 
 
 func (s *RandomizedSet) Insert(val int) bool {
-    if _, found := s.m[val]; found {
+    if _, found := s.idxByVal[val]; found {
         return false
     }
 
-    idx := len(s.nums)
-    s.m[val] = idx
-    s.nums = append(s.nums, val)
+    s.vals = append(s.vals, val)
+    s.idxByVal[val] = len(s.vals) - 1
 
     return true
 }
 
 
 func (s *RandomizedSet) Remove(val int) bool {
-    sliceIdx, found := s.m[val]
+    idx, found := s.idxByVal[val]
     if !found {
         return false
     }
+    
+    // replace value with last
+    // cut array
+    // update index for previus last value
+    // delete val idx in map (important to be last in case of last element delete)
 
-    lastVal := s.nums[len(s.nums)-1]
-    s.nums[sliceIdx] = lastVal
-    s.nums = s.nums[:len(s.nums)-1]
-
-    s.m[lastVal] = sliceIdx
-    delete(s.m, val)
+    lastVal := s.vals[len(s.vals) - 1]
+    s.vals[idx] = lastVal
+    s.vals = s.vals[:len(s.vals) - 1]
+    s.idxByVal[lastVal] = idx
+    delete(s.idxByVal, val)
 
     return true
-    // remove from slice - done
-    // move last on the place of removed value - done
-    // shrink slice - done
-    // update index for last element
-    // remove from map
-    // corner case for last element (done by order of 2 previous step)
 }
 
 
 func (s *RandomizedSet) GetRandom() int {
-    return s.nums[rand.IntN(len(s.nums))] 
+    return s.vals[rand.IntN(len(s.vals))]
 }
 
 
