@@ -3,8 +3,8 @@ name: Sync LeetCode
 on:
   workflow_dispatch:
   schedule:
-    # Weekly on Saturday 08:00 UTC
-    - cron: "0 8 * * 6"
+    # Everyday 08:00 UTC
+    - cron: "0 8 * * *"
 
 permissions:
   contents: write
