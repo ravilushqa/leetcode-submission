@@ -1,18 +1,19 @@
 func groupAnagrams(strs []string) [][]string {
-    chars := make(map[[26]int][]string, len(strs))
+    groups := map[[26]int][]string{}
 
     for _, str := range strs {
-        var strChars [26]int
+        chars := [26]int{}
         for _, char := range []byte(str) {
-            strChars[char - 'a']++
+            chars[char-'a']++
         }
 
-        chars[strChars] = append(chars[strChars], str)
-    }
+        groups[chars] = append(groups[chars], str)
+    } 
 
-    res := make([][]string, 0,len(chars))
-    for _, v := range chars {
-        res = append(res, v)
+
+    res := make([][]string, 0, len(groups))
+    for _, group := range groups {
+        res = append(res, group)
     }
 
     return res
