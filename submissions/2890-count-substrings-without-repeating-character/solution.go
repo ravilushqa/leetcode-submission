@@ -1,19 +1,17 @@
 func numberOfSpecialSubstrings(s string) int {
-    res := 0
-    start := 0
+	start := 0
+	res := 0
 
-    var chars [26]int
+	chars := [26]int{}
+	for end, v := range []byte(s) {
+		chars[v-'a']++
+		for chars[v-'a'] > 1 {
+			chars[s[start]-'a']--
+			start++
+		}
 
-    for end, v := range s {
-        chars[v-'a']++
+		res += end - start + 1
+	}
 
-        for chars[v-'a'] > 1 {
-            chars[s[start] - 'a']--
-            start++
-        }
-
-        res += end - start + 1
-    }
-
-    return res
+	return res
 }
