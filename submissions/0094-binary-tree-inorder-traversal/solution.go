@@ -7,19 +7,17 @@
  * }
  */
 func inorderTraversal(root *TreeNode) []int {
-    return inOrderRecursive(root, nil)
+    return dfs(root, nil)
 }
 
-func inOrderRecursive(node *TreeNode, res []int) []int {
+func dfs(node *TreeNode, res []int) []int {
     if node == nil {
         return res
     }
 
-    res = inOrderRecursive(node.Left, res)
+    res = dfs(node.Left, res)
     res = append(res, node.Val)
-    res = inOrderRecursive(node.Right, res)
+    res = dfs(node.Right, res)
 
     return res
 }
-
-
