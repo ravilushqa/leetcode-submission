@@ -1,16 +1,17 @@
 func sortedSquares(nums []int) []int {
     res := make([]int, len(nums))
-    start, end := 0, len(nums) - 1
+    l, r := 0 , len(nums) - 1
 
-    for start <= end {
-        startSqr := nums[start] * nums[start]
-        endSqr := nums[end] * nums[end]
-        if startSqr > endSqr {
-            res[end-start] = startSqr
-            start++
+    for l <= r {
+        lsqr := nums[l] * nums[l]
+        rsqr := nums[r] * nums[r]
+
+        if lsqr > rsqr {
+            res[r-l] = lsqr
+            l++
         } else {
-            res[end-start] = endSqr
-            end--
+            res[r-l] = rsqr
+            r--
         }
     }
 
