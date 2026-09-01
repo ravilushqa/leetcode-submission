@@ -1,16 +1,16 @@
 func canConstruct(ransomNote string, magazine string) bool {
-    m := make(map[rune]int, len(magazine))
-    
-    for _, v := range magazine {
-        m[v]++
+    magazineChars := [26]int{}
+
+    for _, v := range []byte(magazine) {
+        magazineChars[v-'a']++
     }
-    
-    for _, v := range ransomNote {
-        if m[v] < 1 {
+
+    for _, v := range []byte(ransomNote) {
+        magazineChars[v-'a']--
+        if magazineChars[v-'a'] < 0 {
             return false
         }
-        m[v]--
     }
-    
+
     return true
 }
