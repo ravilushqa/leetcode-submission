@@ -1,15 +1,15 @@
 func isIsomorphic(s string, t string) bool {
-    var sToT,tToS [256]byte
+    var tToS, sToT [256]byte
 
     for i := 0; i < len(s); i++ {
         sVal, tVal := s[i]+1, t[i]+1
-
-        if (sToT[sVal] != 0 && sToT[sVal] != tVal) || (tToS[tVal] != 0 && tToS[tVal] != sVal) {
+        
+        if (tToS[tVal] != 0 && tToS[tVal] != sVal) || (sToT[sVal] != 0 && sToT[sVal] != tVal) {
             return false
         }
 
-        sToT[sVal], tToS[tVal] = tVal, sVal
-    }
+        tToS[tVal], sToT[sVal] =  sVal, tVal
+    } 
 
     return true
 }
