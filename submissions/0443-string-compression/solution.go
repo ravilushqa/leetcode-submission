@@ -1,10 +1,9 @@
 func compress(chars []byte) int {
-    readIdx, writeIdx := 0, 0
-    
+    var readIdx, writeIdx int
+
     for readIdx < len(chars) {
         char := chars[readIdx]
-        count := 1
-        readIdx++
+        count := 0
         
         for readIdx < len(chars) && chars[readIdx] == char {
             count++
@@ -13,12 +12,15 @@ func compress(chars []byte) int {
 
         chars[writeIdx] = char
         writeIdx++
-        if count > 1 {
-            digits := strconv.Itoa(count)
-            for _, c := range []byte(digits) {
-                chars[writeIdx] = c
-                writeIdx++
-            }
+
+        if count == 1 {
+            continue
+        }
+
+        digits := strconv.Itoa(count)
+        for _, digit := range []byte(digits) {
+            chars[writeIdx] = digit
+            writeIdx++
         }
     }
 
