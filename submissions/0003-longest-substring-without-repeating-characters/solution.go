@@ -1,16 +1,18 @@
 func lengthOfLongestSubstring(s string) int {
-	var last [256]int // last[c] = индекс последнего вхождения + 1; 0 = не встречался
-	best, left := 0, 0
-	for i := 0; i < len(s); i++ {
-        c := s[i]
-        if last[c] > left {
-            left = last[c]
+    var start, res int
+
+    chars := map[byte]int{}
+    
+    for end, char := range []byte(s) {
+        chars[char]++
+        
+        for chars[char] > 1 {
+            chars[s[start]]--
+            start++
         }
 
-        last[c] = i+1
-        if n := i - left + 1;n > best {
-            best = n
-        }
-	}
-	return best
+        res = max(res, end - start + 1)
+    }
+
+    return res
 }
