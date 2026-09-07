@@ -1,10 +1,13 @@
 func longestSubarray(nums []int) int {
-    var start, res, zeros int
+    res := 0
+    start := 0
+    zeros := 0
 
     for end, v := range nums {
         if v == 0 {
             zeros++
         }
+
         for zeros > 1 {
             if nums[start] == 0 {
                 zeros--
