@@ -1,12 +1,11 @@
 func lengthOfLongestSubstring(s string) int {
-    var start, res int
+    res := 0
+    start := 0
+    chars := [256]int{}
 
-    chars := map[byte]int{}
-    
-    for end, char := range []byte(s) {
-        chars[char]++
-        
-        for chars[char] > 1 {
+    for end, v := range []byte(s) {
+        chars[v]++
+        for chars[v] > 1 {
             chars[s[start]]--
             start++
         }
