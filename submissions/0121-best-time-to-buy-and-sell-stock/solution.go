@@ -1,16 +1,8 @@
 func maxProfit(prices []int) int {
-    minPrice := -1
-    maxProfit := 0
-    
+    best, minVal := 0, math.MaxInt
     for _, v := range prices {
-        if minPrice == -1 || v < minPrice {
-            minPrice = v
-        } else {
-            if v - minPrice > maxProfit {
-                maxProfit = v - minPrice
-            }
-        }
+        minVal = min(minVal, v)
+        best = max(best, v-minVal)
     }
-
-    return maxProfit
+    return best
 }
