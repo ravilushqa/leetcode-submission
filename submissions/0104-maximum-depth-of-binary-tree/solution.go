@@ -7,15 +7,13 @@
  * }
  */
 func maxDepth(root *TreeNode) int {
-    return dfs(root, 0)
+    return dfs(root)
 }
 
-func dfs(node *TreeNode, height int) int {
+func dfs(node *TreeNode) int {
     if node == nil {
-        return height
+        return 0
     }
 
-    height++
-
-    return max(dfs(node.Left, height), dfs(node.Right, height))
+    return 1 + max(dfs(node.Left), dfs(node.Right))
 }
