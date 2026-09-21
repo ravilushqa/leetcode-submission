@@ -3,27 +3,27 @@ func backspaceCompare(s string, t string) bool {
     stackT := []byte{}
 
     for _, v := range []byte(s) {
-        if v != '#' {
-            stackS = append(stackS, v)
+        if v == '#' {
+            if len(stackS) > 0 {
+                stackS = stackS[:len(stackS) - 1]
+            }
 
             continue
         }
 
-        if len(stackS) > 0 {
-            stackS = stackS[:len(stackS) - 1]
-        }
+        stackS = append(stackS, v)
     }
 
     for _, v := range []byte(t) {
-        if v != '#' {
-            stackT = append(stackT, v)
+        if v == '#' {
+            if len(stackT) > 0 {
+                stackT = stackT[:len(stackT) - 1]
+            }
 
             continue
         }
 
-        if len(stackT) > 0 {
-            stackT = stackT[:len(stackT) - 1]
-        }
+        stackT = append(stackT, v)
     }
 
     return slices.Equal(stackS, stackT)
