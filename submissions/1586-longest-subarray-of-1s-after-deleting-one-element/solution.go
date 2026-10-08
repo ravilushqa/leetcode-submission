@@ -1,22 +1,24 @@
 func longestSubarray(nums []int) int {
-    res := 0
-    start := 0
+    l := 0
     zeros := 0
+    max := 0
 
-    for end, v := range nums {
+    for r, v := range nums {
         if v == 0 {
             zeros++
         }
 
         for zeros > 1 {
-            if nums[start] == 0 {
+            if nums[l] == 0 {
                 zeros--
             }
-            start++
+            l++
         }
 
-        res = max(res, end - start + 1 - 1)
+        if r - l + 1 - 1 > max {
+            max = r - l + 1 - 1
+        }
     }
 
-    return res
+    return max
 }
